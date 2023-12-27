@@ -5,6 +5,8 @@ import Navbar from "./cpmponents/Navbar";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import DataEntry from "./cpmponents/DataEntry";
+import { Route, Routes } from "react-router-dom";
+import Weather from "./cpmponents/Weather";
 
 function App() {
   const { mode } = useSelector((state) => state.theme);
@@ -28,12 +30,22 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <div className="App">
-        <DataEntry
-          handleModalState={handleModalState}
-          isModaOpen={isModaOpen}
-        />
         <Navbar />
-        <DataTabel handleModalState={handleModalState} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <DataEntry
+                  handleModalState={handleModalState}
+                  isModaOpen={isModaOpen}
+                />
+                <DataTabel handleModalState={handleModalState} />
+              </>
+            }
+          />
+          <Route path="/weather" element={<Weather />} />
+        </Routes>
       </div>
     </ThemeProvider>
   );
